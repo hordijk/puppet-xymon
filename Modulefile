@@ -1,0 +1,10 @@
+name          'pmovil-xymon'
+version       '0.1.0'
+source        'git@github.com:Pmovil/puppet_xymon.git'
+author        'Ivan Stoiev <ivan.stoiev@gmail.com>'
+license       'MIT'
+summary       'Install and configure xymon client'
+description   ''
+project_page  'https://github.com/Pmovil/puppet_xymon'
+
+dependency 'puppetlabs/stdlib'
