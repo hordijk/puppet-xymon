@@ -20,7 +20,7 @@ class xymon::client (
     $real_package_file = $package_file
   } else {
     if($::operatingsystem == 'CentOS'){
-        if($::selinux_enforced){
+        if(str2bool($::selinux_enforced)){
           fail('Default xymon RPMs are not compatible with SE linux. Please, disable SE Linux or provide a compatible RPM file')
         }
     }
