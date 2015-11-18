@@ -11,4 +11,11 @@ class xymon::client::config {
     content => "XYMONSERVERS=\"${servers}\"",
   }
   
+  concat{ $::xymon::params::default_client_task_file: }
+
+  concat::fragment{ 'initial':
+    target  => $::xymon::params::default_client_task_file,
+    content => template('xymon/client/clientlaunch.cfg.erb'),
+  }
+  
 }

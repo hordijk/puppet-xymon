@@ -6,7 +6,12 @@
 class xymon::params {
 
   $default_client_config_file = '/etc/default/xymon-client'
-  $home_dir = '/usr/lib/xymon'
+  $default_home_dir           = '/usr/lib/xymon'
+  $default_client_task_file   = "${default_home_dir}/client/etc/clientlaunch.cfg"
+  $default_client_etc_dir   = "${default_home_dir}/client/etc"
+  $default_client_ext_dir   = "${default_home_dir}/client/ext"
+  $default_user               = 'xymon'
+  $default_group              = 'xymon'
 
   case $::osfamily {
     'Debian'           : {

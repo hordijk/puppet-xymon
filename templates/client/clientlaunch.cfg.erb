@@ -26,16 +26,3 @@
 	LOGFILE $XYMONCLIENTLOGS/xymonclient.log
 	INTERVAL 5m
 
-<% @fields.each_pair do |key, val| %>[<%= key %>]
-        <% unless @val.disabled? %>ENABLED<%= @val.cmd%><% else %>DISABLED<% end %> 
-        <% unless @val.cmd.nil? %>CMD $XYMONCLIENTHOME/<%= @val.cmd%><% end %> 
-        <% unless @val.onhost.nil? %>ONHOST $XYMONCLIENTHOME/<%= @val.onhost%><% end %> 
-        <% unless @val.maxtime.nil? %>MAXTIME $XYMONCLIENTHOME/<%= @val.maxtime%><% end %> 
-        <% unless @val.needs.nil? %>NEEDS $XYMONCLIENTHOME/<%= @val.needs%><% end %> 
-        <% unless @val.group.nil? %>GROUP $XYMONCLIENTHOME/<%= @val.group%><% end %> 
-        <% unless @val.interval.nil? %>INTERVAL $XYMONCLIENTHOME/<%= @val.interval%><% end %> 
-        <% unless @val.crondate.nil? %>CRONDATE $XYMONCLIENTHOME/<%= @val.crontade%><% end %> 
-        <% unless @val.envfile.nil? %>ENVFILE $XYMONCLIENTHOME/<%= @val.envfile%><% end %> 
-        <% unless @val.envarea.nil? %>ENVAREA $XYMONCLIENTHOME/<%= @val.envarea%><% end %> 
-        <% unless @val.logfile.nil? %>LOGFILE $XYMONCLIENTHOME/<%= @val.logfile%><% end %> 
-<% end %>
