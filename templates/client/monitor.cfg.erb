@@ -7,6 +7,6 @@
         <% unless @group.nil? %>GROUP <%= @group %><% end %>
         <% unless @interval.nil? %>INTERVAL <%= @interval %><% end %> 
         <% unless @crondate.nil? %>CRONDATE <%= @crondate %><% end %> 
-        <% unless @envfile.nil? %>ENVFILE <%= @envfile %><% end %>
+        ENVFILE $XYMONCLIENTHOME/etc/xymonclient.cfg
         <% unless @envarea.nil? %>ENVAREA <%= @envarea %><% end %>
         LOGFILE $XYMONCLIENTLOGS/<%= @name %>.log

@@ -9,7 +9,6 @@ define xymon::client::monitor (
   $group           = undef,
   $interval        = undef,
   $crondate        = undef,
-  $envfile         = undef,
   $envarea         = undef,
   $cfg_file_source = undef,
 ) {
