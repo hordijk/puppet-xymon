@@ -13,7 +13,8 @@
 class xymon::client (
     $package_file = '',
     $package_provider = '',
-    $servers = []
+    $servers = [],
+    $tasks = {}
 ) inherits ::xymon::params {
 
   if($package_file != ''){

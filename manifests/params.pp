@@ -6,7 +6,8 @@
 class xymon::params {
 
   $default_client_config_file = '/etc/default/xymon-client'
-  
+  $home_dir = '/usr/lib/xymon'
+
   case $::osfamily {
     'Debian'           : {
       if ($::architecture == 'amd64') {
