@@ -16,7 +16,7 @@ define xymon::client::monitor (
 
   concat::fragment { $name:
     target  => $::xymon::params::default_client_task_file,
-    content => template('xymon/task.cfg.erb'),
+    content => template('xymon/client/monitor.cfg.erb'),
     notify  => Class['::xymon::client::service'],
   }
 
