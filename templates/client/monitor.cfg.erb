@@ -1,6 +1,6 @@
 [<%= @name %>]
         <% if @disabled %>DISABLED<% else %>ENABLED<% end %>
-        CMD $XYMONCLIENTHOME/<%= @name %>
+        CMD $XYMONCLIENTHOME/ext/<%= @name %>
         <% unless @onhost.nil? %>ONHOST <%= @onhost %><% end %>
         <% unless @maxtime.nil? %>MAXTIME <%= @maxtime %><% end %>
         <% unless @needs.nil? %>NEEDS <%= @needs %><% end %>
