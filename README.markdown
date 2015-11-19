@@ -16,16 +16,20 @@ Install and configure xymon-client
 
 ## Module Description
 
-Download and install most recent pakages from http://sourceforge.net/projects/xymon/
+Download and install most recent pakages from http://sourceforge.net/projects/xymon/. Custom packages are allowed.
 
-There is no main/oficial repository for Xymon nor continous/stable package building, so default package versions and OS compability are dependent on SourceForge's content. Please check compability issues.      
+Provides an entry to install "monitors" from https://wiki.xymonton.org/doku.php/monitors
+
+Since there is no main/oficial repository for Xymon nor continous/stable package building,
+default package versions and OS compability are dependent on SourceForge's content.
+Please check [limitations](#Limitations).
 
 ## Setup
 
 ### What xymon affects
 
 * Install and configure xymon-client package and service 
-* manages /etc/default/xymon-client
+* Manages /etc/default/xymon-client
 
 
 ### Beginning with xymon
@@ -38,7 +42,39 @@ class {'xymon::client':
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing the fancy stuff with your module here. 
+Instantiating xymon with a custom package
+```puppet
+class {'xymon::client':
+        package_file    => 'http://your.custom.rpm/xymon-client.rpm',
+        servers         => ['10.10.1.1']
+}
+```
+
+Installing a monitor
+```puppet
+class {'xymon::client':
+        servers         => ['10.10.1.1']
+}
+
+xymon::client::monitor{'mysql':
+  cmd_file_source => 'puppet:///extra_files/xymon/monitors/bb-mysql/bb-mysql.pl',
+  cfg_file_source => 'puppet:///extra_files/xymon/monitors/bb-mysql/bb-mysql.cf'    
+}
+```
+
+Using hiera
+```hiera
+xymon::client:
+  servers:
+  - 192.168.2.210
+xymon::factory:
+  client_monitors:
+    mysql:
+      cmd_file_source: puppet:///extra_files/xymon/monitors/bb-mysql/bb-mysql.pl
+      cfg_file_source: puppet:///extra_files/xymon/monitors/bb-mysql/bb-mysql.cfg
+```
+
+
 
 ## Reference
 ###Classes
@@ -46,17 +82,64 @@ Put the classes, types, and resources for customizing, configuring, and doing th
     
 Install and configure xymon-client
 
-#####`package_file`
+*`servers`
 
-Custom package (.rpm or .deb) URL direction
+*Required*. List of Xymon servers to connect
 
-#####`package_provider`
+*`package_file`
 
-Custom provider to install package
+*Optional*. Custom package (.rpm or .deb) URL direction
 
-#####`servers`
+*`package_provider`
 
-List of Xymon servers to connect
+*Optional*. Custom package provider used to install package
+
+
+###Defined Types
+####`xymon::client::monitor`
+
+Install and configure a Xymon monitor
+
+*`cmd_file_source`
+
+*Required.* Source file of monitor's executable  (passed to a `file` type as `source` attribute) 
+
+*`cfg_file_source`
+
+*Optional.*. Source file that contains configuration file for monitor (passed to a `file` type as `source` attribute) 
+
+*`disabled`
+
+*Optional.* Boolean that disable the monitor
+
+*`onhost`
+
+*Optional.* See [tasks.cfg manpage](https://www.xymon.com/help/manpages/man5/tasks.cfg.5.html)
+
+*`maxtime`
+
+*Optional.* See [tasks.cfg manpage](https://www.xymon.com/help/manpages/man5/tasks.cfg.5.html)
+
+*`needs`
+
+*Optional.* See [tasks.cfg manpage](https://www.xymon.com/help/manpages/man5/tasks.cfg.5.html)
+
+*`group`
+
+*Optional.* See [tasks.cfg manpage](https://www.xymon.com/help/manpages/man5/tasks.cfg.5.html)
+
+*`interval`
+
+*Optional.* See [tasks.cfg manpage](https://www.xymon.com/help/manpages/man5/tasks.cfg.5.html)
+
+*`crondate`
+
+*Optional.* See [tasks.cfg manpage](https://www.xymon.com/help/manpages/man5/tasks.cfg.5.html)
+
+*`envarea`
+
+*Optional.* See [tasks.cfg manpage](https://www.xymon.com/help/manpages/man5/tasks.cfg.5.html)
+
 
 ## Limitations
 
@@ -71,5 +154,5 @@ Other Debians and Fedoras could worth a try. Modules will try to install a packa
 ## Development
 
 
-## Release Notes/Contributors/Etc **Optional**
+## Release Notes/Contributors/Etc
  
