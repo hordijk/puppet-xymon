@@ -11,6 +11,7 @@ define xymon::client::monitor (
   $crondate        = undef,
   $envarea         = undef,
   $cfg_file_source = undef,
+  $extra_packages  = {},
 ) {
   include ::xymon::client
 
@@ -37,4 +38,10 @@ define xymon::client::monitor (
       source => $cfg_file_source,
     }
   }
+
+  $defaults = {
+    ensure => 'present',
+  }
+  create_resources('package', $extra_packages, $defaults)
+
 }
