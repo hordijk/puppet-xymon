@@ -1,5 +1,5 @@
 name          'pmovil-xymon'
-version       '0.2.0'
+version       '0.3.0'
 source        'git@github.com:Pmovil/puppet_xymon.git'
 author        'Ivan Stoiev <ivan.stoiev@gmail.com>'
 license       'MIT'
