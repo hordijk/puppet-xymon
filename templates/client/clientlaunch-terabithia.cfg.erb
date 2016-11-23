@@ -1,0 +1,33 @@
+#
+# The clientlaunch.cfg file is loaded by "xymonlaunch".
+# It controls which of the Xymon client-side modules to run, 
+# (both the main client "xymonclient.sh" and any client-side
+# extensions); how often, and with which parameters, options 
+# and environment variables.
+#
+# Note: On the Xymon *server* itself, this file is normally 
+#       NOT used. Instead, both the client- and server-tasks
+#       are controlled by the tasks.cfg file.
+#
+
+# msgcache is used for passive clients, that cannot connect
+# directly to the Xymon server. This is not the default
+# setup, so this task is normally disabled.
+[msgcache]
+	DISABLED
+	ENVFILE /etc/xymon-client/xymonclient.cfg
+	CMD msgcache --no-daemon
+	LOGFILE $XYMONCLIENTLOGS/msgcache.log
+	PIDFILE $XYMONRUNDIR/msgcache.pid
+	SENDHUP
+
+# The main client task
+[client]
+	ENVFILE /etc/xymon-client/xymonclient.cfg
+	CMD xymonclient.sh 
+	LOGFILE $XYMONCLIENTLOGS/xymonclient.log
+	INTERVAL 100s
+
+
+# Include add-on modules -- do not confuse with /local/ scripts, which are tests inserted directly into the client report
+directory /etc/xymon-client/client.d

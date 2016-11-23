@@ -1,0 +1,15 @@
+[xymon]
+name=Xymon Terabithia RPMS - <%= @releasever %>
+baseurl=http://terabithia.org/rpms/xymon/<%= @opsystem %>/
+enabled=1
+gpgcheck=1
+gpgkey=http://terabithia.org/rpms/RPM-GPG-KEY-JCLEAVER
+protect=0
+
+[xymon-testing]
+name=Xymon Terabithia RPMS - <%= @releasever %> - Testing
+baseurl=http://terabithia.org/rpms/xymon/testing/<%= @opsystem%>/
+enabled=1
+gpgcheck=1
+gpgkey=http://terabithia.org/rpms/RPM-GPG-KEY-JCLEAVER
+protect=0

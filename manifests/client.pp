@@ -16,21 +16,26 @@ class xymon::client (
     $servers = [],
 ) inherits ::xymon::params {
 
-  if($package_file != ''){
-    $real_package_file = $package_file
-  } else {
-    if($::operatingsystem == 'CentOS'){
-        if(str2bool($::selinux_enforced)){
-          fail('Default xymon RPMs are not compatible with SE linux. Please, disable SE Linux or provide a compatible RPM file')
-        }
-    }
-    $real_package_file = $::xymon::params::default_client_package_file
-  }
 
-  if($package_provider != ''){
-    $real_package_provider = $package_provider
+  if($::xymon::enable_terabithia_repo){
+    
   } else {
-    $real_package_provider = $::xymon::params::default_client_package_provider
+    if($package_file != ''){
+      $real_package_file = $package_file
+    } else {
+      if($::operatingsystem == 'CentOS'){
+          if(str2bool($::selinux_enforced)){
+            fail('Default xymon RPMs are not compatible with SE linux. Please, disable SE Linux or provide a compatible RPM file')
+          }
+      }
+      $real_package_file = $::xymon::params::default_client_package_file
+    }
+
+    if($package_provider != ''){
+      $real_package_provider = $package_provider
+    } else {
+      $real_package_provider = $::xymon::params::default_client_package_provider
+    }
   }
 
   class { '::xymon::client::install': } ->

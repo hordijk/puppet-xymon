@@ -13,9 +13,14 @@ class xymon::client::config {
   
   concat{ $::xymon::params::default_client_task_file: }
 
+  if($::xymon::enable_terabithia_repo){
+    $tpl = 'xymon/client/clientlaunch-terabithia.cfg.erb'
+  } else {
+    $tpl = 'xymon/client/clientlaunch.cfg.erb'
+  }
   concat::fragment{ 'initial':
     target  => $::xymon::params::default_client_task_file,
-    content => template('xymon/client/clientlaunch.cfg.erb'),
+    content => template($tpl)
   }
   
 }
